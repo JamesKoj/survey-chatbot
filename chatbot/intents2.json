@@ -1,0 +1,18 @@
+{"intents": [
+        {"tag": "Positive",
+         "patterns": [""],
+          "responses": ["Next"],
+          "context": [""]
+        },
+        {"tag": "Negative",
+         "patterns": [""],
+         "responses": ["Next"],
+         "context": [""]
+        },
+        {"tag": "default_fallback",
+         "patterns": [],
+         "responses": ["Fallback"],
+         "context": [""]
+        }
+   ]
+}
