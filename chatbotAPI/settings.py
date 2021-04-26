@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import tensorflow.compat.v1 as tf
+# from tensorflow.compat.v1.keras.backend import set_session
+import json
+import pickle
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -25,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['chatbot-sentiment-api.herokuapp.com']
+ALLOWED_HOSTS = ['sentiment-api-chatbot.herokuapp.com']
 
 
 
@@ -33,6 +37,7 @@ ALLOWED_HOSTS = ['chatbot-sentiment-api.herokuapp.com']
 
 INSTALLED_APPS = [
     'chatbot',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +50,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -102,6 +109,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "https://jameskoj.limequery.com",
+    "https://survey.euro.confirmit.com"
+]
+
+trained_model = tf.keras.models.load_model('chatbot/chatbotmodel_Q1.h5')
+
+intents = json.loads(open('chatbot/intents2.json').read())
+words = pickle.load(open('chatbot/words.pkl','rb'))
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
