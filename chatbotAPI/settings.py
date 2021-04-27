@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['sentiment-api-chatbot.herokuapp.com']
+ALLOWED_HOSTS = ['api-chatbot.herokuapp.com']
 
 
 
@@ -110,8 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://jameskoj.limequery.com",
-    "https://survey.euro.confirmit.com"
+    "https://google.com"
 ]
 
 trained_model = tf.keras.models.load_model('chatbot/chatbotmodel_Q1.h5')
